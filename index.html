@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Переход на IFRS 18</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Отчет о прибыли или убытке нефтеперерабатывающего предприятия: классификация статей до и после перехода на МСФО (IFRS) 18 с 01.01.2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Sans+Narrow:wght@700&display=swap">
+<style>
+/* Layout: fixed navy band (hero) → narrow reading column for text, wide column for the table and paired statements; sticky anchor menu on top. */
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --ink: #16213a;
+  --muted: #4f5b70;
+  --line: #d6dde8;
+  --primary: #173a73;
+  --hero-bg: #12284d;
+  --hero-ink: #f2f5fb;
+  --hero-muted: #b8c4d8;
+  --amber: #e09a12;
+  --amber-ink: #8a5600;
+  --amber-soft: #fdf3dc;
+  --op: #1f5fbf;    --op-soft: #e5eefb;
+  --inv: #1d7a45;   --inv-soft: #e3f3ea;
+  --fin: #b8560a;   --fin-soft: #fcece0;
+  --tax: #5a6676;   --tax-soft: #eceff3;
+  --focus: #e09a12;
+  --shadow: 0 1px 2px rgba(18, 40, 77, .06), 0 4px 16px rgba(18, 40, 77, .06);
+  --f-body: "PT Sans", "Segoe UI", Arial, sans-serif;
+  --f-display: "PT Sans Narrow", "PT Sans", "Arial Narrow", Arial, sans-serif;
+  --step--1: .875rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.2rem;
+  --step-4: clamp(2.2rem, 5.5vw, 3.6rem);
+  --radius: 10px;
+  --wide: 1180px;
+  --narrow: 760px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1420; --surface: #152033; --surface-2: #1b2840; --ink: #e5eaf2; --muted: #a2adbf; --line: #2b3a54;
+    --primary: #9cbcf5; --hero-bg: #0a1830; --hero-ink: #eef2f9; --hero-muted: #a9b6cc;
+    --amber: #f0b13d; --amber-ink: #f3c46b; --amber-soft: #3a2c10;
+    --op: #79a6ee; --op-soft: #1a2c4b; --inv: #66c493; --inv-soft: #173627;
+    --fin: #f0a061; --fin-soft: #3b2615; --tax: #aab4c2; --tax-soft: #262f3d;
+    --focus: #f0b13d; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1420; --surface: #152033; --surface-2: #1b2840; --ink: #e5eaf2; --muted: #a2adbf; --line: #2b3a54;
+  --primary: #9cbcf5; --hero-bg: #0a1830; --hero-ink: #eef2f9; --hero-muted: #a9b6cc;
+  --amber: #f0b13d; --amber-ink: #f3c46b; --amber-soft: #3a2c10;
+  --op: #79a6ee; --op-soft: #1a2c4b; --inv: #66c493; --inv-soft: #173627;
+  --fin: #f0a061; --fin-soft: #3b2615; --tax: #aab4c2; --tax-soft: #262f3d;
+  --focus: #f0b13d; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--step-0); line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balance; margin: 0; letter-spacing: .005em; }
+h2 { font-size: var(--step-3); color: var(--primary); }
+h3 { font-size: var(--step-1); font-family: var(--f-body); font-weight: 700; }
+p { margin: 0; }
+a { color: var(--primary); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.en { color: var(--muted); font-style: italic; }
+
+.wrap { max-width: var(--wide); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.prose { max-width: var(--narrow); }
+.eyebrow { font-size: var(--step--1); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; color: var(--amber-ink); }
+
+/* Nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 16px; min-height: 52px; }
+.brand { font-family: var(--f-display); font-size: 1.15rem; color: var(--primary); text-decoration: none; white-space: nowrap; }
+.brand b { color: var(--amber-ink); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1; justify-content: flex-end; }
+.nav ul::-webkit-scrollbar { display: none; }
+.nav a.link { display: block; padding: 6px 10px; border-radius: 6px; color: var(--muted); text-decoration: none; white-space: nowrap; font-size: .95rem; }
+.nav a.link:hover { color: var(--ink); background: var(--surface-2); }
+.nav a.link.active { color: var(--primary); background: var(--surface-2); font-weight: 700; }
+
+/* Hero */
+.hero { background: var(--hero-bg); color: var(--hero-ink); position: relative; overflow: hidden; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(255,255,255,.05) 31px 32px),
+                    repeating-linear-gradient(90deg, transparent 0 31px, rgba(255,255,255,.05) 31px 32px);
+  mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+}
+.hero .wrap { position: relative; z-index: 1; padding-block: 56px 48px; display: grid; gap: 40px; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; }
+.hero .eyebrow { color: var(--amber); }
+.hero h1 { font-size: var(--step-4); margin-top: 12px; }
+.hero h1 span { color: var(--amber); }
+.hero .sub { font-size: var(--step-1); color: var(--hero-muted); margin-top: 16px; max-width: 34em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; font: inherit; font-weight: 700; cursor: pointer;
+  border-radius: 8px; padding: 10px 18px; border: 1px solid transparent; text-decoration: none; line-height: 1.2;
+}
+.btn-amber { background: var(--amber); color: #1b1300; }
+.btn-amber:hover { filter: brightness(1.06); }
+.btn-ghost { background: transparent; color: var(--hero-ink); border-color: rgba(255,255,255,.35); }
+.btn-ghost:hover { background: rgba(255,255,255,.08); }
+.timer { border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); padding: 20px; background: rgba(255,255,255,.04); }
+.timer-label { font-size: var(--step--1); color: var(--hero-muted); text-transform: uppercase; letter-spacing: .08em; }
+.timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+.timer-cell { text-align: center; }
+.timer-num { font-family: var(--f-display); font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.timer-unit { font-size: .8rem; color: var(--hero-muted); }
+.timer-done { font-family: var(--f-display); font-size: 2rem; color: var(--amber); }
+.timer-note { margin-top: 14px; font-size: var(--step--1); color: var(--hero-muted); border-top: 1px solid rgba(255,255,255,.14); padding-top: 12px; }
+
+/* Sections */
+section { scroll-margin-top: 64px; }
+.sec { padding-block: 64px; }
+.sec + .sec { border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+.sec-head p { color: var(--muted); font-size: 1.08rem; max-width: 46em; }
+
+.cards3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: grid; gap: 10px; align-content: start; }
+.card .k { font-family: var(--f-display); font-size: 2.4rem; line-height: 1; color: var(--amber); }
+.card p { color: var(--muted); }
+.card ul { margin: 0; padding-left: 1.1em; color: var(--muted); display: grid; gap: 4px; }
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: .85rem; font-weight: 700; padding: 3px 9px 3px 8px; border-radius: 999px; white-space: nowrap; border: 1px solid currentColor; }
+.badge::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: currentColor; flex: none; }
+.cat-op { color: var(--op); background: var(--op-soft); }
+.cat-inv { color: var(--inv); background: var(--inv-soft); }
+.cat-fin { color: var(--fin); background: var(--fin-soft); }
+.cat-tax { color: var(--tax); background: var(--tax-soft); }
+.pill-moved { display: inline-block; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 2px 8px; border-radius: 4px; background: var(--amber); color: #1b1300; }
+
+/* Timeline */
+.why-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 0; }
+.timeline li { position: relative; padding: 0 0 26px 34px; }
+.timeline li::before { content: ""; position: absolute; left: 9px; top: 6px; bottom: -6px; width: 2px; background: var(--line); }
+.timeline li:last-child::before { display: none; }
+.timeline .dot { position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); }
+.timeline li.done .dot { background: var(--primary); border-color: var(--primary); }
+.timeline li.done::before { background: var(--primary); }
+.timeline li.key .dot { background: var(--amber); border-color: var(--amber); box-shadow: 0 0 0 5px var(--amber-soft); }
+.timeline .when { font-family: var(--f-display); font-size: 1.3rem; color: var(--primary); font-variant-numeric: tabular-nums; }
+.timeline li.key .when { color: var(--amber-ink); }
+.timeline .what { color: var(--muted); }
+.timeline .now { display: inline-block; margin-left: 8px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--primary); border: 1px solid var(--primary); border-radius: 4px; padding: 0 6px; vertical-align: middle; font-family: var(--f-body); }
+.why-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.why-list li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 4px; }
+.why-list strong { color: var(--ink); }
+.why-list span { color: var(--muted); }
+
+/* Table toolbar */
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: .92rem; cursor: pointer; border-radius: 999px; padding: 6px 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.chip:hover { border-color: var(--primary); }
+.chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--surface); font-weight: 700; }
+.tools { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch .track { width: 40px; height: 22px; border-radius: 999px; background: var(--line); position: relative; flex: none; transition: background .15s; }
+.switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.switch input:checked + .track { background: var(--amber); }
+.switch input:checked + .track::after { transform: translateX(18px); }
+.switch input:focus-visible + .track { outline: 3px solid var(--focus); outline-offset: 2px; }
+.btn-line { background: var(--surface); color: var(--primary); border-color: var(--line); font-weight: 700; font-size: .92rem; padding: 7px 12px; }
+.btn-line:hover { border-color: var(--primary); }
+.status { font-size: .9rem; color: var(--muted); min-height: 1.4em; }
+
+.table-box { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; min-width: 980px; }
+caption { text-align: left; padding: 14px 16px; font-size: .9rem; color: var(--muted); caption-side: bottom; border-top: 1px solid var(--line); }
+th, td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+thead th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: var(--surface-2); position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; color: var(--muted); width: 40px; }
+tbody th { font-weight: 400; min-width: 240px; }
+.name { font-weight: 700; }
+.typ { display: inline-block; margin-left: 6px; font-size: .75rem; color: var(--muted); border: 1px dashed var(--line); border-radius: 4px; padding: 0 5px; font-weight: 400; }
+.own { display: block; font-size: .8rem; color: var(--muted); margin-top: 2px; }
+tr.changed td, tr.changed th { background: var(--amber-soft); }
+tr.changed td:first-child { box-shadow: inset 4px 0 0 var(--amber); }
+.change-txt strong { color: var(--amber-ink); }
+.why-btn { font: inherit; font-size: .9rem; font-weight: 700; color: var(--primary); background: none; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+.why-btn:hover { border-color: var(--primary); background: var(--surface-2); }
+.empty { padding: 28px; text-align: center; color: var(--muted); }
+
+/* Decision steps */
+.steps { list-style: none; padding: 0; margin: 0 0 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; counter-reset: s; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.steps li { padding: 18px 20px; counter-increment: s; display: grid; gap: 6px; align-content: start; }
+.steps li + li { border-left: 1px solid var(--line); }
+.steps li::before { content: "Шаг " counter(s); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--amber-ink); }
+.steps p { color: var(--muted); }
+
+/* Reason cards */
+.reasons { display: grid; gap: 12px; }
+details.reason { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); scroll-margin-top: 72px; transition: box-shadow .3s, border-color .3s; }
+details.reason[open] { box-shadow: var(--shadow); }
+details.reason.flash { border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-soft); }
+details.reason summary { list-style: none; cursor: pointer; padding: 16px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+details.reason summary::-webkit-details-marker { display: none; }
+details.reason summary .t { font-weight: 700; flex: 1 1 260px; min-width: 0; }
+details.reason summary .chev { width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .2s; margin-left: 4px; flex: none; }
+details.reason[open] summary .chev { transform: rotate(-135deg); }
+.reason-body { padding: 0 20px 20px; display: grid; gap: 12px; max-width: 820px; }
+.reason-body p { color: var(--ink); }
+.reason-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .9rem; color: var(--muted); }
+.reason-meta b { color: var(--ink); }
+.note { border-left: 3px solid var(--amber); background: var(--amber-soft); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: .95rem; }
+
+/* Statements */
+.tabs { display: none; gap: 6px; margin-bottom: 12px; }
+.forms { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.stmt { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.stmt-head { padding: 14px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+.stmt-head .yr { font-size: .85rem; color: var(--muted); }
+.stmt ol { list-style: none; margin: 0; padding: 0; }
+.stmt li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; padding: 8px 18px; border-bottom: 1px solid var(--line); transition: background .2s; }
+.stmt li:last-child { border-bottom: 0; }
+.stmt li .no { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .9rem; padding-top: 1px; }
+.stmt li.total { font-weight: 700; }
+.stmt li.req { font-weight: 700; background: var(--surface-2); }
+.stmt li.req .lbl::after { content: "обязательный итог"; display: inline-block; margin-left: 8px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--amber-ink); border: 1px solid var(--amber); border-radius: 4px; padding: 0 5px; vertical-align: 1px; }
+.stmt li.cat { padding-top: 14px; }
+.stmt li.cat .lbl { font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 700; }
+.stmt li.cat.c-op .lbl { color: var(--op); } .stmt li.cat.c-inv .lbl { color: var(--inv); } .stmt li.cat.c-fin .lbl { color: var(--fin); } .stmt li.cat.c-tax .lbl { color: var(--tax); }
+.stmt li.dash .lbl { color: var(--muted); }
+.stmt li.moved { box-shadow: inset 4px 0 0 var(--amber); background: var(--amber-soft); }
+.stmt li.hl { background: var(--amber); color: #1b1300; }
+.stmt li.hl .no { color: #1b1300; }
+
+.recon { margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; }
+.recon-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: center; padding: 12px; border-radius: 8px; border: 1px solid var(--line); cursor: default; }
+.recon-row:hover, .recon-row:focus-visible { border-color: var(--amber); background: var(--amber-soft); }
+.recon-side { display: grid; gap: 2px; min-width: 0; }
+.recon-side small { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.arrow { display: flex; align-items: center; color: var(--amber-ink); }
+.arrow svg { width: 64px; height: 20px; }
+
+/* Footer */
+footer { background: var(--hero-bg); color: var(--hero-muted); }
+footer .wrap { padding-block: 40px; display: grid; gap: 24px; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+footer h3 { color: var(--hero-ink); font-size: 1rem; margin-bottom: 8px; }
+footer ul { margin: 0; padding-left: 1.1em; display: grid; gap: 3px; columns: 2; }
+footer .disc { color: var(--hero-ink); border-left: 3px solid var(--amber); padding-left: 12px; }
+
+/* Tooltip */
+.term { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help; border-bottom: 1px dashed currentColor; }
+.tip { position: fixed; z-index: 50; max-width: min(320px, calc(100vw - 32px)); background: var(--ink); color: var(--bg); padding: 10px 12px; border-radius: 8px; font-size: .9rem; line-height: 1.45; box-shadow: var(--shadow); pointer-events: none; }
+.tip b { display: block; margin-bottom: 2px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 40px 36px; gap: 28px; }
+  .cards3, .why-grid { grid-template-columns: minmax(0, 1fr); }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .steps li + li { border-left: 0; border-top: 1px solid var(--line); }
+  footer .wrap { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 800px) {
+  .tabs { display: flex; }
+  .forms { grid-template-columns: minmax(0, 1fr); }
+  .forms .stmt:not(.active) { display: none; }
+  .recon-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .arrow svg { transform: rotate(90deg); width: 24px; height: 24px; }
+}
+@media (max-width: 520px) {
+  .brand { display: none; }
+  .nav ul { justify-content: flex-start; }
+  .sec { padding-block: 44px; }
+  footer ul { columns: 1; }
+}
+
+/* Print */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface-2: #f1f3f6; --ink: #000; --muted: #333; --line: #bbb; --hero-bg: #fff; --hero-ink: #000; --hero-muted: #333; --primary: #12284d; }
+  .nav, .hero-actions, .timer, .toolbar, .tabs, .why-btn, .tip, .no-print { display: none !important; }
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 0 16px; }
+  .hero::after { display: none; }
+  .sec { padding-block: 18px; break-inside: auto; }
+  .table-box { overflow: visible; box-shadow: none; }
+  table { min-width: 0; font-size: 9.5pt; }
+  th, td { padding: 6px 8px; }
+  thead th { position: static; }
+  tr { break-inside: avoid; }
+  .forms { grid-template-columns: 1fr 1fr; }
+  .forms .stmt { display: block !important; }
+  details.reason .reason-body { display: grid !important; }
+  .badge, tr.changed td, .stmt li.moved, .pill-moved { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  footer .wrap { padding-block: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Разделы">
+  <div class="wrap">
+    <a class="brand" href="#top">МСФО (IFRS) <b>18</b></a>
+    <ul>
+      <li><a class="link" href="#about">Что такое IFRS 18</a></li>
+      <li><a class="link" href="#why">Почему с 01.01.2027</a></li>
+      <li><a class="link" href="#table">Таблица статей</a></li>
+      <li><a class="link" href="#reasons">Обоснование</a></li>
+      <li><a class="link" href="#forms">ОПУ до и после</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Нефтеперерабатывающее предприятие · методический материал</div>
+      <h1>Переход на МСФО (IFRS)&nbsp;18 <span>с&nbsp;01.01.2027</span></h1>
+      <p class="sub">Отчет о прибыли или убытке: что меняется с 01.01.2027. Куда переходит каждая статья доходов и расходов и почему.</p>
+      <div class="hero-actions">
+        <a class="btn btn-amber" href="#table">К сравнительной таблице</a>
+        <a class="btn btn-ghost" href="#why">Почему с 01.01.2027</a>
+      </div>
+    </div>
+    <div class="timer" aria-live="polite">
+      <div class="timer-label" id="timer-label">До вступления в силу</div>
+      <div id="timer-body" class="timer-grid">
+        <div class="timer-cell"><div class="timer-num" id="t-d">—</div><div class="timer-unit">дней</div></div>
+        <div class="timer-cell"><div class="timer-num" id="t-h">—</div><div class="timer-unit">часов</div></div>
+        <div class="timer-cell"><div class="timer-num" id="t-m">—</div><div class="timer-unit">минут</div></div>
+        <div class="timer-cell"><div class="timer-num" id="t-s">—</div><div class="timer-unit">секунд</div></div>
+      </div>
+      <div class="timer-note">Годовые периоды, начинающиеся 01.01.2027 или позже. Сравнительные данные за 2026 год пересчитываются.</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Новый стандарт</div>
+        <h2>Что такое МСФО (IFRS) 18</h2>
+        <p>Стандарт «Представление и раскрытие информации в финансовой отчетности» <span class="en">(Presentation and Disclosure in Financial Statements)</span> заменяет МСФО (IAS) 1 и задает единую структуру Отчета о прибыли или убытке.</p>
+      </div>
+      <div class="cards3">
+        <article class="card">
+          <div class="k">5</div>
+          <h3>Категории</h3>
+          <p>Каждый доход и расход относится к одной категории:</p>
+          <ul>
+            <li><span class="badge cat-op">Операционная</span> <span class="en">(operating)</span></li>
+            <li><span class="badge cat-inv">Инвестиционная</span> <span class="en">(investing)</span></li>
+            <li><span class="badge cat-fin">Финансовая</span> <span class="en">(financing)</span></li>
+            <li><span class="badge cat-tax">Налог на прибыль</span> <span class="en">(income taxes)</span></li>
+            <li>Прекращенная деятельность <span class="en">(discontinued operations)</span></li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="k">2</div>
+          <h3>Обязательные итоги</h3>
+          <p>В IAS 1 <button type="button" class="term" data-term="opprofit">операционная прибыль</button> не была определена. IFRS 18 вводит два обязательных промежуточных итога:</p>
+          <ul>
+            <li>Операционная прибыль <span class="en">(operating profit)</span></li>
+            <li>Прибыль до финансовой деятельности и налога на прибыль <span class="en">(profit before financing and income taxes)</span></li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="k">MPM</div>
+          <h3>Показатели руководства</h3>
+          <p><button type="button" class="term" data-term="mpm">Показатели эффективности, определенные руководством</button>, раскрываются в одном примечании со сверкой с ближайшим итогом IFRS 18. На этом сайте MPM упоминаются только справочно.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Дата перехода</div>
+        <h2>Почему именно с 01.01.2027</h2>
+        <p>Первая отчетность по новым правилам будет за 2027 год. Но классификацию нужно согласовать заранее, потому что 2026 год станет сравнительным периодом.</p>
+      </div>
+      <div class="why-grid">
+        <ol class="timeline" id="timeline" aria-label="Шкала времени перехода"></ol>
+        <ul class="why-list">
+          <li><strong>Дата вступления в силу</strong><span>IFRS 18 применяется к годовым отчетным периодам, начинающимся 01.01.2027 или позже, и полностью заменяет МСФО (IAS) 1.</span></li>
+          <li><strong>Ретроспективный пересчет</strong><span>Сравнительные данные за 2026 год пересчитываются по новым категориям, хотя в течение 2026 года учет ведется по IAS 1.</span></li>
+          <li><strong>Сверка за 2026 год</strong><span>В первой отчетности по IFRS 18 раскрывается построчная сверка ОПУ за 2026 год между IAS 1 и IFRS 18.</span></li>
+          <li><strong>Без досрочного применения</strong><span>Досрочное применение разрешено, но предприятие переходит с обязательной даты.</span></li>
+          <li><strong>Цель изменения</strong><span>Единые категории и обязательные итоги делают отчеты разных компаний сопоставимыми.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="table">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Центральный блок</div>
+        <h2>Сравнительная таблица статей</h2>
+        <p>Две статьи меняют место: процентный доход по займам работникам уходит в инвестиционную категорию, <button type="button" class="term" data-term="discount">амортизация дисконта</button> по резерву на ликвидацию — в финансовую. Строки с пометкой «типовая» добавлены для полноты формы.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Фильтр по категории IFRS 18" id="filters"></div>
+        <div class="tools">
+          <label class="switch" for="only-changed">
+            <input type="checkbox" id="only-changed">
+            <span class="track" aria-hidden="true"></span>
+            <span>Только изменившиеся статьи</span>
+          </label>
+          <button type="button" class="btn btn-line" id="csv-btn">Экспорт в CSV</button>
+          <button type="button" class="btn btn-line" id="print-btn">Печать / PDF</button>
+        </div>
+      </div>
+      <div class="status" id="status" role="status"></div>
+
+      <div class="table-box">
+        <table id="items-table">
+          <caption>Классификация статей ОПУ: до 31.12.2026 по МСФО (IAS) 1, с 01.01.2027 по МСФО (IFRS) 18. Подсвечены статьи, которые меняют место.</caption>
+          <thead>
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col">Статья</th>
+              <th scope="col">До 31.12.2026: строка ОПУ по IAS 1</th>
+              <th scope="col">С 01.01.2027: категория IFRS 18</th>
+              <th scope="col">Входит в итог IFRS 18</th>
+              <th scope="col">Что меняется</th>
+              <th scope="col"><span class="no-print">Обоснование</span></th>
+            </tr>
+          </thead>
+          <tbody id="items-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="reasons">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Карточки «Почему?»</div>
+        <h2>Обоснование по статьям</h2>
+        <p>Категория зависит от <button type="button" class="term" data-term="main">основной деятельности</button> предприятия. Основная деятельность — переработка нефти. Предприятие не инвестирует в активы и не финансирует клиентов в качестве основной деятельности.</p>
+      </div>
+      <ol class="steps" aria-label="Как определяется категория">
+        <li><h3>Оценить основную деятельность</h3><p>Переработка нефти не является инвестированием в активы или финансированием клиентов.</p></li>
+        <li><h3>Отделить инвестиции и обязательства</h3><p>Доходы от инвестиций относятся к инвестиционной категории, доходы и расходы по обязательствам — к финансовой.</p></li>
+        <li><h3>Остальное — в операционную</h3><p>Операционная категория остаточная: в нее попадает все, что не отнесено к другим категориям.</p></li>
+      </ol>
+      <div class="reasons" id="reasons-list"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="forms">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Форма без цифр</div>
+        <h2>ОПУ до и после перехода</h2>
+        <p>Слева форма по МСФО (IAS) 1, которая действует до 31.12.2026, справа форма по МСФО (IFRS) 18 с 01.01.2027. Перенесенные строки подсвечены.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Формы ОПУ">
+        <button type="button" class="chip" role="tab" id="tab-ias" aria-controls="stmt-ias" aria-selected="true" aria-pressed="true">До: IAS 1</button>
+        <button type="button" class="chip" role="tab" id="tab-ifrs" aria-controls="stmt-ifrs" aria-selected="false" aria-pressed="false" tabindex="-1">После: IFRS 18</button>
+      </div>
+      <div class="forms">
+        <div class="stmt active" id="stmt-ias" role="tabpanel" aria-labelledby="tab-ias">
+          <div class="stmt-head"><h3>Отчет о прибыли или убытке · IAS 1</h3><span class="yr">До 31.12.2026</span></div>
+          <ol id="list-ias"></ol>
+        </div>
+        <div class="stmt" id="stmt-ifrs" role="tabpanel" aria-labelledby="tab-ifrs">
+          <div class="stmt-head"><h3>Отчет о прибыли или убытке · IFRS 18</h3><span class="yr">С 01.01.2027</span></div>
+          <ol id="list-ifrs"></ol>
+        </div>
+      </div>
+
+      <div class="recon" aria-labelledby="recon-h">
+        <div>
+          <h3 id="recon-h">Сверка за 2026 год</h3>
+          <p style="color:var(--muted);margin-top:4px">Какие строки формы IAS 1 переходят в другие строки формы IFRS 18. Наведите курсор или выделите строку сверки, чтобы подсветить обе строки в формах.</p>
+        </div>
+        <div id="recon-list" style="display:grid;gap:10px"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Нормативная база</h3>
+      <ul>
+        <li>МСФО (IFRS) 18</li>
+        <li>МСФО (IAS) 1</li>
+        <li>МСФО (IFRS) 15</li>
+        <li>МСФО (IFRS) 16</li>
+        <li>МСФО (IAS) 16</li>
+        <li>МСФО (IFRS) 9</li>
+        <li>МСФО (IAS) 19</li>
+        <li>МСФО (IAS) 37</li>
+        <li>Разъяснение КРМФО (IFRIC) 1</li>
+        <li>Экологический кодекс</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:14px;align-content:start">
+      <p class="disc">Материал носит методический характер и не заменяет профессиональное суждение и мнение аудитора.</p>
+      <p>Актуально на 19.10.2026 · Версия 1.0</p>
+    </div>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== Данные (NFR-03): правки вносятся здесь, разметка не меняется ===== */
+  var CATS = {
+    op:  { label: "Операционная" },
+    inv: { label: "Инвестиционная" },
+    fin: { label: "Финансовая" },
+    tax: { label: "Налог на прибыль" }
+  };
+
+  var ROWS = [
+    { n: 1, name: "Выручка от переработки нефти", own: "Основная деятельность · IFRS 15", ias: "Выручка", cat: "op", total: "Операционная прибыль", change: "Место не меняется", why: "r-revenue" },
+    { n: 2, name: "Себестоимость продаж", typical: true, ias: "Себестоимость продаж", cat: "op", total: "Операционная прибыль", change: "Место не меняется; раскрываются расходы по характеру" },
+    { n: 3, name: "Доход от услуг ЦЗЛ", own: "Прочие услуги · IFRS 15", ias: "Прочие операционные доходы", cat: "op", total: "Операционная прибыль", change: "Место не меняется; входит в обязательный итог", why: "r-lab" },
+    { n: 4, name: "Доход от операционной аренды (объект — ОС, IAS 16)", own: "Предприятие — арендодатель · IFRS 16", ias: "Прочие операционные доходы", cat: "op", total: "Операционная прибыль", change: "Место не меняется; суждение закрепляется в учетной политике", why: "r-lease" },
+    { n: 5, name: "Коммерческие, общие и административные расходы", typical: true, ias: "Коммерческие / административные расходы", cat: "op", total: "Операционная прибыль", change: "Место не меняется" },
+    { n: 6, name: "Убыток при первоначальном признании займа работнику по справедливой стоимости", typical: true, ias: "Прочие операционные расходы / расходы на персонал", cat: "op", total: "Операционная прибыль", change: "Место не меняется: вознаграждение работникам (IAS 19)", why: "r-loans" },
+    { n: 7, name: "Амортизация дисконта по займам, выданным работникам", own: "Процентный доход · IFRS 9", ias: "Финансовые доходы", cat: "inv", total: "Прибыль до финансовой деятельности и налога на прибыль", change: "Переносится", changed: true, why: "r-loans" },
+    { n: 8, name: "Амортизация дисконта по резерву на ликвидацию предприятия", own: "Резерв по Экологическому кодексу · IAS 37, IFRIC 1", ias: "Финансовые расходы", cat: "fin", total: "Прибыль до налога на прибыль", change: "Переносится ниже нового итога", changed: true, why: "r-decom" },
+    { n: 9, name: "Налог на прибыль", typical: true, ias: "Расход по налогу на прибыль", cat: "tax", total: "Прибыль за период", change: "Отдельная категория" }
+  ];
+
+  var REASONS = [
+    { id: "r-revenue", title: "Выручка от переработки нефти", cat: "op", basis: "IFRS 15, IFRS 18",
+      text: "Доход от основной деятельности. Формирует операционную прибыль до и после перехода." },
+    { id: "r-lab", title: "Доход от услуг центральной заводской лаборатории (ЦЗЛ)", cat: "op", basis: "IFRS 15, IFRS 18",
+      text: "Не основная деятельность, но и не доход от инвестиций или финансирования. Поэтому статья попадает в остаточную категорию — операционную." },
+    { id: "r-lease", title: "Доход от сдачи имущества в операционную аренду", cat: "op", basis: "IFRS 16, IAS 16, IAS 40, IFRS 18",
+      text: "Объект учитывается как основные средства (IAS 16), а не как инвестиционная недвижимость (IAS 40). Он входит в производственную инфраструктуру и не приносит доход независимо от других ресурсов предприятия. Суждение закрепляется в учетной политике. Для инвестиционной недвижимости категория была бы инвестиционной.",
+      note: "Открытый вопрос: если сдаваемое имущество окажется отдельным объектом, приносящим доход независимо от других ресурсов, доход от аренды перейдет в инвестиционную категорию." },
+    { id: "r-loans", title: "Амортизация дисконта по займам, выданным работникам", cat: "inv", changed: true, basis: "IFRS 9, IAS 19, IFRS 18",
+      text: "Заем — финансовый актив, который приносит процентный доход отдельно от других ресурсов. Для предприятия, которое не финансирует клиентов в качестве основной деятельности, это доход от инвестиций. До перехода статья показывалась в финансовых доходах.",
+      note: "Разница между номиналом и справедливой стоимостью при выдаче займа — вознаграждение работнику (IAS 19). Она остается в операционной категории." },
+    { id: "r-decom", title: "Амортизация дисконта по резерву на ликвидацию предприятия", cat: "fin", changed: true, basis: "IAS 37, IFRIC 1, Экологический кодекс, IFRS 18",
+      text: "Резерв по Экологическому кодексу — обязательство, которое не возникло из привлечения финансирования. Процентные расходы по нему (амортизация дисконта) относятся к финансовой категории и показываются ниже итога «Прибыль до финансовой деятельности и налога на прибыль».",
+      note: "Изменения оценки резерва корректируют стоимость актива (IFRIC 1) и через ОПУ не проходят." }
+  ];
+
+  var TIMELINE = [
+    { date: "2024-04-09", when: "Апрель 2024", what: "Совет по МСФО выпускает IFRS 18." },
+    { date: "2026-01-01", when: "01.01.2026", what: "Начало сравнительного периода. Учет еще по IAS 1, но данные понадобятся для пересчета." },
+    { date: "2026-12-31", when: "31.12.2026", what: "Последний отчетный день по IAS 1." },
+    { date: "2027-01-01", when: "01.01.2027", what: "IFRS 18 вступает в силу.", key: true },
+    { date: "2028-01-01", when: "Отчетность за 2027", what: "Первая отчетность по IFRS 18 со сверкой ОПУ за 2026 год." }
+  ];
+
+  // Формы ОПУ (п. 6.5). type: line | total | req | cat | dash; link — ключ для сверки
+  var FORM_IAS = [
+    { t: "Выручка" }, { t: "Себестоимость продаж" }, { t: "Валовая прибыль", type: "total" },
+    { t: "Коммерческие расходы" }, { t: "Общие и административные расходы" },
+    { t: "Прочие операционные доходы (ЦЗЛ, аренда)" }, { t: "Прочие операционные расходы" },
+    { t: "Операционная прибыль (необязательный итог)", type: "total" },
+    { t: "Финансовые доходы (дисконт по займам работникам)", link: "loans" },
+    { t: "Финансовые расходы (дисконт по резерву на ликвидацию)", link: "decom" },
+    { t: "Прибыль до налогообложения", type: "total" }, { t: "Расход по налогу на прибыль" },
+    { t: "Прибыль за период", type: "total" }, { t: "—", type: "dash" }, { t: "—", type: "dash" }
+  ];
+  var FORM_IFRS = [
+    { t: "Операционная категория", type: "cat", c: "op" }, { t: "Выручка" }, { t: "Себестоимость продаж" },
+    { t: "Валовая прибыль", type: "total" }, { t: "Коммерческие расходы" }, { t: "Общие и административные расходы" },
+    { t: "Прочие операционные доходы (ЦЗЛ, аренда)" }, { t: "Прочие операционные расходы" },
+    { t: "Операционная прибыль", type: "req" },
+    { t: "Инвестиционная категория: амортизация дисконта по займам работникам", link: "loans", c: "inv" },
+    { t: "Прибыль до финансовой деятельности и налога на прибыль", type: "req" },
+    { t: "Финансовая категория: амортизация дисконта по резерву на ликвидацию", link: "decom", c: "fin" },
+    { t: "Прибыль до налога на прибыль", type: "total" },
+    { t: "Категория «Налог на прибыль»: расход по налогу на прибыль", c: "tax" },
+    { t: "Прибыль за период", type: "total" }
+  ];
+
+  var TERMS = {
+    opprofit: ["Операционная прибыль (operating profit)", "Обязательный итог IFRS 18: сумма всех доходов и расходов операционной категории. Категория остаточная — в нее попадает все, что не отнесено к инвестиционной, финансовой, налогу и прекращенной деятельности."],
+    discount: ["Амортизация дисконта (unwinding of discount)", "Постепенное приближение дисконтированной величины актива или обязательства к номиналу с течением времени. Отражается как процентный доход или расход по методу эффективной ставки."],
+    main: ["Основная деятельность (main business activities)", "Деятельность, которую предприятие ведет как основную. Для НПЗ — переработка нефти. От нее зависит, попадут ли доходы от инвестиций и финансирования в операционную категорию."],
+    mpm: ["MPM (management-defined performance measures)", "Показатели эффективности, определенные руководством: промежуточные итоги, которые предприятие использует в публичных сообщениях вне финансовой отчетности. Раскрываются в одном примечании со сверкой."]
+  };
+
+  /* ===== Утилиты ===== */
+  function el(tag, attrs, html) {
+    var e = document.createElement(tag);
+    if (attrs) for (var k in attrs) { if (attrs[k] != null) e.setAttribute(k, attrs[k]); }
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function badge(cat) { return '<span class="badge cat-' + cat + '">' + CATS[cat].label + "</span>"; }
+  var framed = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+
+  /* ===== Таймер (FR-07) ===== */
+  var TARGET = new Date(2027, 0, 1, 0, 0, 0).getTime();
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+  function tick() {
+    var diff = TARGET - Date.now();
+    if (diff <= 0) {
+      document.getElementById("timer-label").textContent = "Статус";
+      document.getElementById("timer-body").outerHTML = '<div class="timer-done">IFRS 18 действует</div>';
+      clearInterval(timerId);
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    document.getElementById("t-d").textContent = Math.floor(s / 86400);
+    document.getElementById("t-h").textContent = pad(Math.floor(s % 86400 / 3600));
+    document.getElementById("t-m").textContent = pad(Math.floor(s % 3600 / 60));
+    document.getElementById("t-s").textContent = pad(s % 60);
+  }
+  var timerId = setInterval(tick, 1000);
+  tick();
+
+  /* ===== Шкала времени ===== */
+  (function () {
+    var ol = document.getElementById("timeline");
+    var now = Date.now(), marked = false;
+    TIMELINE.forEach(function (it, i) {
+      var t = new Date(it.date + "T00:00:00").getTime();
+      var done = t <= now;
+      var li = el("li", { "class": (done ? "done " : "") + (it.key ? "key" : "") });
+      var nowTag = "";
+      var next = TIMELINE[i + 1];
+      if (!marked && done && (!next || new Date(next.date + "T00:00:00").getTime() > now)) { nowTag = '<span class="now">мы здесь</span>'; marked = true; }
+      li.innerHTML = '<span class="dot" aria-hidden="true"></span><div class="when">' + esc(it.when) + nowTag + '</div><div class="what">' + esc(it.what) + "</div>";
+      ol.appendChild(li);
+    });
+  })();
+
+  /* ===== Таблица (FR-01..05) ===== */
+  var state = { cat: "all", onlyChanged: false };
+  try {
+    var saved = JSON.parse(localStorage.getItem("ifrs18-filter") || "null");
+    if (saved && (saved.cat === "all" || CATS[saved.cat])) { state.cat = saved.cat; state.onlyChanged = !!saved.onlyChanged; }
+  } catch (e) {}
+
+  var filtersBox = document.getElementById("filters");
+  [["all", "Все"]].concat(Object.keys(CATS).map(function (k) { return [k, CATS[k].label]; })).forEach(function (f) {
+    var b = el("button", { type: "button", "class": "chip", "data-cat": f[0], "aria-pressed": String(state.cat === f[0]) }, esc(f[1]));
+    b.addEventListener("click", function () { state.cat = f[0]; renderTable(); });
+    filtersBox.appendChild(b);
+  });
+  var onlyBox = document.getElementById("only-changed");
+  onlyBox.checked = state.onlyChanged;
+  onlyBox.addEventListener("change", function () { state.onlyChanged = onlyBox.checked; renderTable(); });
+
+  function visibleRows() {
+    return ROWS.filter(function (r) {
+      return (state.cat === "all" || r.cat === state.cat) && (!state.onlyChanged || r.changed);
+    });
+  }
+
+  function renderTable() {
+    try { localStorage.setItem("ifrs18-filter", JSON.stringify(state)); } catch (e) {}
+    Array.prototype.forEach.call(filtersBox.children, function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-cat") === state.cat)); });
+    var body = document.getElementById("items-body");
+    body.innerHTML = "";
+    var rows = visibleRows();
+    rows.forEach(function (r) {
+      var tr = el("tr", { "class": r.changed ? "changed" : null });
+      tr.innerHTML =
+        '<td class="num">' + r.n + "</td>" +
+        '<th scope="row" style="font-weight:400"><span class="name">' + esc(r.name) + "</span>" + (r.typical ? '<span class="typ">типовая</span>' : "") + (r.own ? '<span class="own">' + esc(r.own) + "</span>" : "") + "</th>" +
+        "<td>" + esc(r.ias) + "</td>" +
+        "<td>" + badge(r.cat) + "</td>" +
+        "<td>" + esc(r.total) + "</td>" +
+        '<td class="change-txt">' + (r.changed ? '<span class="pill-moved">' + esc(r.change) + "</span>" : esc(r.change)) + "</td>" +
+        "<td>" + (r.why ? '<button type="button" class="why-btn" data-why="' + r.why + '" aria-label="Почему? ' + esc(r.name) + '">Почему?</button>' : "") + "</td>";
+      body.appendChild(tr);
+    });
+    if (!rows.length) {
+      var tr = el("tr");
+      tr.innerHTML = '<td colspan="7" class="empty">В этой категории нет изменившихся статей. Выключите «Только изменившиеся статьи» или выберите другую категорию.</td>';
+      body.appendChild(tr);
+    }
+    var cat = state.cat === "all" ? "все категории" : "категория «" + CATS[state.cat].label + "»";
+    document.getElementById("status").textContent = "Показано статей: " + rows.length + " из " + ROWS.length + " · " + cat + (state.onlyChanged ? " · только изменившиеся" : "");
+  }
+
+  document.getElementById("items-body").addEventListener("click", function (e) {
+    var b = e.target.closest(".why-btn");
+    if (b) openReason(b.getAttribute("data-why"));
+  });
+
+  /* ===== Карточки обоснования ===== */
+  (function () {
+    var box = document.getElementById("reasons-list");
+    REASONS.forEach(function (r) {
+      var d = el("details", { "class": "reason", id: r.id });
+      d.innerHTML =
+        "<summary>" + badge(r.cat) + '<span class="t">' + esc(r.title) + "</span>" + (r.changed ? '<span class="pill-moved">Переносится</span>' : "") + '<span class="chev" aria-hidden="true"></span></summary>' +
+        '<div class="reason-body"><p>' + esc(r.text) + "</p>" +
+        (r.note ? '<p class="note">' + esc(r.note) + "</p>" : "") +
+        '<div class="reason-meta"><span><b>Категория IFRS 18:</b> ' + CATS[r.cat].label + "</span><span><b>Стандарты:</b> " + esc(r.basis) + "</span></div></div>";
+      box.appendChild(d);
+    });
+  })();
+
+  function openReason(id) {
+    var d = document.getElementById(id);
+    if (!d) return;
+    d.open = true;
+    d.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    d.classList.remove("flash"); void d.offsetWidth; d.classList.add("flash");
+    setTimeout(function () { d.classList.remove("flash"); }, 1800);
+    var s = d.querySelector("summary");
+    if (s) s.focus({ preventScroll: true });
+  }
+
+  /* ===== Формы ОПУ и сверка ===== */
+  function renderForm(listId, form, side) {
+    var ol = document.getElementById(listId);
+    form.forEach(function (r, i) {
+      var cls = [];
+      if (r.type === "total") cls.push("total");
+      if (r.type === "req") cls.push("req");
+      if (r.type === "cat") cls.push("cat", "c-" + r.c);
+      if (r.type === "dash") cls.push("dash");
+      if (r.link) cls.push("moved");
+      var li = el("li", { "class": cls.join(" ") || null, "data-link": r.link ? side + "-" + r.link : null });
+      var label = esc(r.t);
+      if (r.c && r.type !== "cat") {
+        var parts = r.t.split(": ");
+        label = parts.length > 1 ? badge(r.c) + " " + esc(parts.slice(1).join(": ")) : esc(r.t);
+        if (r.c === "tax") label = badge("tax") + " " + esc(parts.slice(1).join(": "));
+      }
+      li.innerHTML = '<span class="no">' + (i + 1) + '</span><span class="lbl">' + label + "</span>";
+      ol.appendChild(li);
+    });
+  }
+  renderForm("list-ias", FORM_IAS, "ias");
+  renderForm("list-ifrs", FORM_IFRS, "ifrs");
+
+  var RECON = [
+    { key: "loans", from: 9, fromT: "Финансовые доходы (дисконт по займам работникам)", to: 10, toCat: "inv", toT: "Амортизация дисконта по займам работникам" },
+    { key: "decom", from: 10, fromT: "Финансовые расходы (дисконт по резерву на ликвидацию)", to: 12, toCat: "fin", toT: "Амортизация дисконта по резерву на ликвидацию" }
+  ];
+  var arrowSvg = '<svg viewBox="0 0 64 20" aria-hidden="true"><path d="M2 10 H56" stroke="currentColor" stroke-width="2.5" fill="none"/><path d="M50 3 L60 10 L50 17" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>';
+  (function () {
+    var box = document.getElementById("recon-list");
+    RECON.forEach(function (r) {
+      var row = el("div", { "class": "recon-row", tabindex: "0", "data-key": r.key, "aria-label": "Строка " + r.from + " формы IAS 1 переходит в строку " + r.to + " формы IFRS 18" });
+      row.innerHTML =
+        '<div class="recon-side"><small>IAS 1 · строка ' + r.from + "</small><span>" + esc(r.fromT) + "</span></div>" +
+        '<div class="arrow">' + arrowSvg + "</div>" +
+        '<div class="recon-side"><small>IFRS 18 · строка ' + r.to + "</small><span>" + badge(r.toCat) + " " + esc(r.toT) + "</span></div>";
+      function on() { setHl(r.key, true); }
+      function off() { setHl(r.key, false); }
+      row.addEventListener("mouseenter", on); row.addEventListener("mouseleave", off);
+      row.addEventListener("focus", on); row.addEventListener("blur", off);
+      box.appendChild(row);
+    });
+  })();
+  function setHl(key, on) {
+    document.querySelectorAll('[data-link="ias-' + key + '"],[data-link="ifrs-' + key + '"]').forEach(function (li) { li.classList.toggle("hl", on); });
+  }
+
+  // Вкладки на мобильных
+  var tabs = [document.getElementById("tab-ias"), document.getElementById("tab-ifrs")];
+  function selectTab(idx) {
+    tabs.forEach(function (t, i) {
+      var sel = i === idx;
+      t.setAttribute("aria-selected", String(sel));
+      t.setAttribute("aria-pressed", String(sel));
+      t.tabIndex = sel ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).classList.toggle("active", sel);
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { selectTab(i); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") { var n = (i + 1) % 2; selectTab(n); tabs[n].focus(); e.preventDefault(); }
+    });
+  });
+
+  /* ===== CSV (FR-09) и печать (FR-08) ===== */
+  function buildCsv() {
+    var head = ["№", "Статья", "Типовая", "До 31.12.2026: строка ОПУ по IAS 1", "С 01.01.2027: категория IFRS 18", "Входит в итог IFRS 18", "Что меняется"];
+    var lines = [head].concat(ROWS.map(function (r) {
+      return [r.n, r.name, r.typical ? "да" : "", r.ias, CATS[r.cat].label, r.total, r.change];
+    }));
+    return lines.map(function (l) {
+      return l.map(function (v) { v = String(v); return /[;"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(";");
+    }).join("\r\n");
+  }
+  var statusEl = document.getElementById("status");
+  var csvBtn = document.getElementById("csv-btn");
+  if (framed) csvBtn.textContent = "Копировать CSV";
+  csvBtn.addEventListener("click", function () {
+    var csv = buildCsv();
+    if (!framed) {
+      var blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "ifrs18-klassifikaciya-statei.csv";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      statusEl.textContent = "Файл ifrs18-klassifikaciya-statei.csv сохранен (разделитель — точка с запятой).";
+      return;
+    }
+    function fallback() {
+      var ta = el("textarea", { "aria-label": "CSV", style: "position:fixed;left:-9999px" });
+      ta.value = csv; document.body.appendChild(ta); ta.select();
+      var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+      ta.remove();
+      statusEl.textContent = ok ? "CSV скопирован в буфер обмена. Вставьте его в Excel или текстовый файл." : "Не удалось скопировать CSV. Откройте сайт как файл index.html и используйте экспорт.";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(csv).then(function () { statusEl.textContent = "CSV скопирован в буфер обмена. Вставьте его в Excel или текстовый файл."; }, fallback);
+    } else fallback();
+  });
+  var printBtn = document.getElementById("print-btn");
+  if (framed) printBtn.hidden = true;
+  printBtn.addEventListener("click", function () { window.print(); });
+  window.addEventListener("beforeprint", function () { document.querySelectorAll("details.reason").forEach(function (d) { d.open = true; }); });
+
+  /* ===== Подсказки к терминам (FR-06) ===== */
+  var tip = document.getElementById("tip");
+  var tipFor = null;
+  function showTip(btn) {
+    var d = TERMS[btn.getAttribute("data-term")];
+    if (!d) return;
+    tip.innerHTML = "<b>" + esc(d[0]) + "</b>" + esc(d[1]);
+    tip.hidden = false;
+    btn.setAttribute("aria-describedby", "tip");
+    var r = btn.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+    var left = Math.min(Math.max(16, r.left), window.innerWidth - tw - 16);
+    var top = r.bottom + 8;
+    if (top + th > window.innerHeight - 8) top = r.top - th - 8;
+    tip.style.left = left + "px"; tip.style.top = Math.max(8, top) + "px";
+    tipFor = btn;
+  }
+  function hideTip() { if (tipFor) tipFor.removeAttribute("aria-describedby"); tip.hidden = true; tipFor = null; }
+  document.querySelectorAll(".term").forEach(function (b) {
+    b.addEventListener("mouseenter", function () { showTip(b); });
+    b.addEventListener("mouseleave", hideTip);
+    b.addEventListener("focus", function () { showTip(b); });
+    b.addEventListener("blur", hideTip);
+    b.addEventListener("click", function () { if (tipFor === b) hideTip(); else showTip(b); });
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hideTip(); });
+  window.addEventListener("scroll", hideTip, { passive: true });
+
+  /* ===== Активный пункт меню (FR-10) ===== */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav a.link"));
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (a) {
+            var on = a.getAttribute("href") === "#" + en.target.id;
+            a.classList.toggle("active", on);
+            if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+          });
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    document.querySelectorAll("main section[id]").forEach(function (s) { io.observe(s); });
+  }
+
+  renderTable();
+})();
+</script>
+</body>
+</html>
